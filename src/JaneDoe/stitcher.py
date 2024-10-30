@@ -9,7 +9,7 @@ class PanaromaStitcher():
     def __init__(self):
         pass
 
-    def make_panaroma_for_images_in(self,path):
+    def make_panaroma_for_images_in(self,path,fov = 50):
         imf = path
         all_images = sorted(glob.glob(imf+os.sep+'*'))
         print('Found {} Images for stitching'.format(len(all_images)))
@@ -21,7 +21,7 @@ class PanaromaStitcher():
         self.do_something()
         self.do_something_more()
 
-        some_function.some_func()
+        # some_function.some_func()
         folder_func.foo()
 
         # Collect all homographies calculated for pair of images and return

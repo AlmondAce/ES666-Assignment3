@@ -28,8 +28,8 @@ for idx,algo in enumerate(all_submissions):
         index = 0
         for impaths in glob.glob(path):
             print('\t\t Processing... {}'.format(impaths))
-            pov_list = [30,55,55,45,40,50]
-            stitched_image, homography_matrix_list = inst.make_panaroma_for_images_in(path=impaths , fov = pov_list[index])
+            fov_list = [30,55,55,45,40,50]
+            stitched_image, homography_matrix_list = inst.make_panaroma_for_images_in(path = impaths ,fov= fov_list[index])
 
             outfile =  './results/{}/{}.png'.format(impaths.split(os.sep)[-1],spec.name)
             os.makedirs(os.path.dirname(outfile),exist_ok=True)
