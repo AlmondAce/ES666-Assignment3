@@ -3,8 +3,7 @@ import glob
 import cv2
 import os
 import matplotlib.pyplot as plt
-from src.JohnDoe.utils import *
-from src.JohnDoe.some_folder import folder_func
+import numpy as np
 # from src.
 class PanaromaStitcher():
     fov = None
@@ -230,7 +229,7 @@ class PanaromaStitcher():
         Images = []
         k = 1100
         for i in all_images:
-            img = cv.imread(i)
+            img = cv2.imread(i)
             img = cv2.resize(img , (self.resize_size , self.resize_size))
             Images.append(img)
         return Images
