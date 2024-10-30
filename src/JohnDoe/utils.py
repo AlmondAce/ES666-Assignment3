@@ -1,13 +1,12 @@
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
-
+import glob
+import os
 def display_mat(images, title="Title_here"):
-    # Check if the input is a single image or a list of images
     if isinstance(images, list):
         num_images = len(images)
-        plt.figure()  # Adjust the size as needed
-
+        plt.figure()
         for i, img in enumerate(images):
             if isinstance(img, np.ndarray):
                 plt.subplot(1, num_images, i + 1)  # 1 row, num_images columns
@@ -48,4 +47,3 @@ def display_cv(listoo, waitkey=0, title="Title_here"):
     key = cv.waitKey(waitkey)
     if key & 0xFF == ord('d'):
         cv.destroyAllWindows()
-

@@ -1,7 +1,7 @@
 import pdb
 import src
 import glob
-import importlib
+import importlib.util
 import os
 import cv2
 
@@ -25,9 +25,11 @@ for idx,algo in enumerate(all_submissions):
         inst = PanaromaStitcher()
 
         ###
+        index = 0
         for impaths in glob.glob(path):
             print('\t\t Processing... {}'.format(impaths))
-            stitched_image, homography_matrix_list = inst.make_panaroma_for_images_in(path=impaths)
+            pov_list = [30,55,55,45,40,50]
+            stitched_image, homography_matrix_list = inst.make_panaroma_for_images_in(path=impaths , fov = pov_list[index])
 
             outfile =  './results/{}/{}.png'.format(impaths.split(os.sep)[-1],spec.name)
             os.makedirs(os.path.dirname(outfile),exist_ok=True)
@@ -35,6 +37,7 @@ for idx,algo in enumerate(all_submissions):
             print(homography_matrix_list)
             print('Panaroma saved ... @ ./results/{}.png'.format(spec.name))
             print('\n\n')
+            index+=1
 
     except Exception as e:
         print('Oh No! My implementation encountered this issue\n\t{}'.format(e))
