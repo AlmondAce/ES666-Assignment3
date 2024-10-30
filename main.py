@@ -26,7 +26,7 @@ for idx,algo in enumerate(all_submissions):
 
         ###
         index = 0
-        fov_list = [30,55,55,35,25,30]
+        fov_list = [30,50,58,35,25,20]
         for impaths in glob.glob(path):
             print('\t\t Processing... {}'.format(impaths))
             folder_name = impaths.split(os.sep)[-1]

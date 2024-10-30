@@ -223,17 +223,21 @@ class PanaromaStitcher():
             base_img = stitched_img.copy()
 
         return base_img, homography_mats
+    def rescale(self,imgs, scale=0.5):
+        h, w = imgs.shape[:2]  # Get the height and width of the image
+        new_size = (int(w * scale), int(h * scale))  # Calculate new size (width, height)
+        return cv2.resize(imgs, new_size)  # Resize the image
 
     def get_Images( self,path):
         all_images = sorted(glob.glob(path+os.sep+'*'))
         Images = []
-        k = 1100
         for i in all_images:
             img = cv2.imread(i)
-            img = cv2.resize(img , (self.resize_size , self.resize_size))
+            ht , wt, ch = img.shape
+            # img = cv2.resize(img , (self.resize_size , self.resize_size))
+            img = self.rescale(img , self.resize_size/wt)
             Images.append(img)
         return Images
-    
     def make_panaroma_for_images_in(self,path,fov=50,resis = 1200,Ratio = 0.75):
         self.Ratio = Ratio
         self.resize_size = resis
@@ -247,7 +251,6 @@ class PanaromaStitcher():
         self.say_hi()
 
         stitched_image,homography_matrix_list = self.StitchImages_MiddleBase(Images)  
-        
         return stitched_image, homography_matrix_list 
 
     def say_hi(self):
