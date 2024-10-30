@@ -139,8 +139,8 @@ class PanaromaStitcher():
         pts_base = np.float32(pts_base)
         pts_sec = np.float32(pts_sec)
         
-        (H, status) = cv2.findHomography(pts_sec, pts_base, cv2.RANSAC, 4.0)
-        # (H, status) = self.ransac_H(pts_sec, pts_base)
+        # (H, status) = cv2.findHomography(pts_sec, pts_base, cv2.RANSAC, 4.0)
+        (H, status) = self.ransac_H(pts_sec, pts_base)
         return H, status
        
     def GetNewFrameSizeAndMatrix(self, H, sec_shape, base_shape):
@@ -199,7 +199,6 @@ class PanaromaStitcher():
         base_img_transformed = np.zeros((new_size[0], new_size[1], 3), dtype=np.uint8)
         base_img_transformed[offset[1]:offset[1] + base_img.shape[0], offset[0]:offset[0] + base_img.shape[1]] = base_img
 
-        # Create a blending mask for feathering
         blend_mask = cv2.GaussianBlur(sec_img_mask_warp, (51, 51), 0) / 255.0  # Adjust kernel size as needed for feathering
         base_blend_mask = 1.0 - blend_mask
 
